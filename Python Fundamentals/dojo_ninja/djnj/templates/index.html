@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrapper">
+        <form action="/process" method="post"></form>
+            <div class = addDojo>
+                <input type="hidden" name="form" value="Add_Dojo">
+                <h1>Add a Dojo</h1>
+                <input type="text" name="name" placeholder="Dojo Name">
+                <input type="text" name="city" placeholder="City">
+                <input type="text" name="state" placeholder="State">
+                <button type="submit">Add a Dojo</button>
+            </div>
+
+            <div class="addNinja">
+                <input type="hidden" name="form" value="Add_Ninja">
+                <h1>Add a Ninja</h1>
+                <input type="text" name="first_name" placeholder="First Name">
+                <input type="text" name="last_name" placeholder="Last Name">
+                <input type="text" name="dojo_id" placeholder="Dojo ID">
+                <button type="submit">Add a Ninja</button>
+            </div>  
+        </form>
+
+        <ul>
+            {% for i in dojos %}
+            <li>{{ i.name }}</li>
+            <ul>
+                {% for j in ninjas %}
+                    {% if j.dojo_id.id == i.id %}
+                    <li>{{j.first_name}} {{j.last_name}}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+
+<!-- ///////////////////////////////////////////////////////////////////////// -->
+
+<!-- 
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add a Dojo</h1>
+    <form action="/dojo" method="post">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Name">
+    <input type="text" name="city" placeholder="City">
+    <input type="text" name="state" placeholder="State">
+    <input type="hidden" name="form" value="Add_Dojo">
+    <button type="submit">Add</button>
+
+    </form>
+
+
+    
+    <h1>Add a Ninja</h1>
+    <form action="/dojo" method="post">
+    {% csrf_token %}
+    <input type="text" name="first_name" placeholder= "First Name">
+    <input type="text" name="last_name" placeholder= "Last Name">
+    <select name="dojo_select">
+        {% for dojo in dojos %}
+        <option value={{dojo.id}}>{{dojo.State}}</option>
+        {% endfor %}
+    </select>
+    <input type="hidden" name="form" value="Add_Ninja">
+    <button type="submit">Add</button>
+    
+    </form>
+
+
+    
+
+    <ul>
+        {% for dojoid in dojos %}
+        <li>{{ dojoid.name }}</li>
+        <ul>
+            {% for i in dojoid.ninjas.all %}
+            <li>{{i.first_name}} {{i.last_name}}</li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    </ul>
+
+    
+</body>
+</html> -->
